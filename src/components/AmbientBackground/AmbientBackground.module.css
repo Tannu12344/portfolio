@@ -1,0 +1,94 @@
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-background);
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--color-bg);
+}
+
+/* Faint pixel-grid — evokes level/world design without being literal */
+.grid {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(var(--color-border-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-hairline) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+}
+
+/* Ambient glows — arcade marquee lighting, slow independent drift */
+.glow {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.32;
+  will-change: transform;
+}
+
+.glowAccent {
+  top: -180px;
+  left: -120px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  animation: driftA 26s ease-in-out infinite alternate;
+}
+
+.glowSecondary {
+  bottom: -220px;
+  right: -160px;
+  background: radial-gradient(circle, var(--color-accent-secondary) 0%, transparent 70%);
+  animation: driftB 32s ease-in-out infinite alternate;
+}
+
+@keyframes driftA {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(60px, 40px);
+  }
+}
+
+@keyframes driftB {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50px, -30px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowAccent,
+  .glowSecondary {
+    animation: none;
+  }
+}
+
+/* Subtle CRT-style scanlines — very low opacity, texture only */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.5;
+}
+
+/* Edge vignette to keep content readable over the glows */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 50% 30%,
+    transparent 40%,
+    var(--color-bg) 100%
+  );
+}

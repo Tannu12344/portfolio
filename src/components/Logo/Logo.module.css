@@ -1,0 +1,22 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+}
+
+.bracket {
+  color: var(--color-accent-secondary);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin-left: var(--space-1);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  border-radius: 1px;
+}

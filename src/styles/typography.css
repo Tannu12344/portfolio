@@ -1,0 +1,60 @@
+/**
+ * TYPOGRAPHY
+ * ----------
+ * Three-role type system:
+ *  - display (Space Grotesk): headings, geometric + technical character
+ *  - body (Inter): paragraphs, UI copy, premium SaaS legibility
+ *  - mono (JetBrains Mono): eyebrows, labels, data, HUD-style accents
+ */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+p {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-faint {
+  color: var(--color-text-faint);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-secondary {
+  color: var(--color-accent-secondary);
+}

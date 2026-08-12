@@ -1,0 +1,22 @@
+.section {
+  position: relative;
+  padding-block: var(--section-padding-y);
+  scroll-margin-top: var(--header-height);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 640px;
+  margin-bottom: var(--space-12);
+}
+
+.title {
+  font-size: var(--text-3xl);
+}
+
+.description {
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+}
