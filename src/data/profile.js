@@ -15,7 +15,7 @@ export const profile = {
     'every animation, token, and interaction is a deliberate decision. ' +
     'I care about performance, accessibility, and the small details that ' +
     'make a product feel premium.',
-  email: 'tannusingh12344@gmail.com',
+  email: 'tannusingh8597@gmail.com',
   resumeUrl: '/resume.pdf',
   avatar: null, // e.g. '/src/assets/avatar.jpg'
   socials: [
