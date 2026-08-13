@@ -15,12 +15,11 @@ export const profile = {
     'every animation, token, and interaction is a deliberate decision. ' +
     'I care about performance, accessibility, and the small details that ' +
     'make a product feel premium.',
-  email: 'hello@example.com',
+  email: 'tannusingh12344@gmail.com',
   resumeUrl: '/resume.pdf',
   avatar: null, // e.g. '/src/assets/avatar.jpg'
   socials: [
-    { id: 'github', label: 'GitHub', url: 'https://github.com/yourhandle' },
-    { id: 'linkedin', label: 'LinkedIn', url: 'https://linkedin.com/in/yourhandle' },
-    { id: 'twitter', label: 'X / Twitter', url: 'https://x.com/yourhandle' },
+    { id: 'github', label: 'GitHub', url: 'https://github.com/Tannu12344/' },
+    { id: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/tannu-singh-14b13620/' },
   ],
 };
