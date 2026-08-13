@@ -5,17 +5,36 @@
   align-items: center;
   padding-top: var(--header-height);
   overflow: hidden;
+
   --parallax-x: 0;
   --parallax-y: 0;
 }
 
+/* ---------- Main Hero Layout ---------- */
+
+.heroGrid {
+  position: relative;
+  z-index: var(--z-content);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: center;
+  gap: 4rem;
+
+  width: 100%;
+}
+
+/* ---------- Hero Content ---------- */
+
 .content {
   position: relative;
   z-index: var(--z-content);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-4);
+
   max-width: 760px;
 }
 
@@ -42,6 +61,8 @@
   max-width: 52ch;
 }
 
+/* ---------- Actions ---------- */
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -50,8 +71,6 @@
   margin-top: var(--space-4);
 }
 
-/* Wrapper (not the button itself) carries the hover lift, so it never
-   fights with Button's own :active press-state transform. */
 .ctaPrimaryWrap {
   display: inline-flex;
   transition: transform var(--duration-base) var(--ease-out);
@@ -70,48 +89,145 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- Decorative parallax depth layer ----------
-   Two soft glow orbs that drift gently on their own (ambient float) and
-   shift further with pointer position via useMouseParallax's CSS vars.
-   Entirely decorative: aria-hidden, and both the float keyframe and the
-   pointer-driven shift are disabled under prefers-reduced-motion. */
+/* ---------- Transparent Profile Image ---------- */
+
+.imageWrapper {
+  position: relative;
+  z-index: var(--z-content);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.imageFrame {
+  position: relative;
+
+  width: min(320px, 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient glow behind the transparent subject */
+
+.imageGlow {
+  position: absolute;
+  z-index: 0;
+
+  width: 70%;
+  height: 70%;
+
+  border-radius: 50%;
+
+  background: var(--color-accent);
+  opacity: 0.12;
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+/* Transparent profile image */
+
+.profileImage {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  background: transparent;
+
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  pointer-events: none;
+}
+
+/* ---------- Decorative Parallax Depth ---------- */
+
 .orbAccent,
 .orbSecondary {
   position: absolute;
   z-index: var(--z-background);
+
   border-radius: 50%;
+
   filter: blur(60px);
+
   pointer-events: none;
 }
 
 .orbAccent {
   width: 280px;
   height: 280px;
+
   top: 18%;
   right: 8%;
-  background: radial-gradient(circle, var(--color-accent) 0%, transparent 72%);
+
+  background: radial-gradient(
+    circle,
+    var(--color-accent) 0%,
+    transparent 72%
+  );
+
   opacity: 0.22;
-  transform: translate3d(calc(var(--parallax-x) * 30px), calc(var(--parallax-y) * 22px), 0);
+
+  transform: translate3d(
+    calc(var(--parallax-x) * 30px),
+    calc(var(--parallax-y) * 22px),
+    0
+  );
+
   animation: floatAccent 10s ease-in-out infinite alternate;
-  transition: transform var(--duration-slow) var(--ease-out);
+
+  transition:
+    transform var(--duration-slow) var(--ease-out);
 }
 
 .orbSecondary {
   width: 220px;
   height: 220px;
+
   bottom: 12%;
   left: 4%;
-  background: radial-gradient(circle, var(--color-accent-secondary) 0%, transparent 72%);
+
+  background: radial-gradient(
+    circle,
+    var(--color-accent-secondary) 0%,
+    transparent 72%
+  );
+
   opacity: 0.2;
-  transform: translate3d(calc(var(--parallax-x) * -24px), calc(var(--parallax-y) * -18px), 0);
+
+  transform: translate3d(
+    calc(var(--parallax-x) * -24px),
+    calc(var(--parallax-y) * -18px),
+    0
+  );
+
   animation: floatSecondary 12s ease-in-out infinite alternate;
-  transition: transform var(--duration-slow) var(--ease-out);
+
+  transition:
+    transform var(--duration-slow) var(--ease-out);
 }
+
+/* ---------- Ambient Animation ---------- */
 
 @keyframes floatAccent {
   from {
     margin-top: 0;
   }
+
   to {
     margin-top: 24px;
   }
@@ -121,10 +237,13 @@
   from {
     margin-top: 0;
   }
+
   to {
     margin-top: -20px;
   }
 }
+
+/* ---------- Reduced Motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .orbAccent,
@@ -138,7 +257,48 @@
   }
 }
 
+/* ---------- Tablet ---------- */
+
+@media (max-width: 900px) {
+  .hero {
+    align-items: flex-start;
+    padding-top: calc(var(--header-height) + 3rem);
+    padding-bottom: 4rem;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageWrapper {
+    order: -1;
+  }
+
+  .imageFrame {
+    width: min(280px, 70vw);
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+/* ---------- Mobile ---------- */
+
 @media (max-width: 640px) {
+  .hero {
+    padding-top: calc(var(--header-height) + 2rem);
+  }
+
+  .heroGrid {
+    gap: 2.5rem;
+  }
+
+  .imageFrame {
+    width: min(230px, 68vw);
+  }
+
   .actions {
     flex-direction: column;
     align-items: stretch;
