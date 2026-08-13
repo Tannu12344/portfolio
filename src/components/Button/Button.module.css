@@ -20,6 +20,12 @@
   transform: translateY(1px);
 }
 
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .primary {
   background-color: var(--color-accent);
   color: var(--color-text-inverse);

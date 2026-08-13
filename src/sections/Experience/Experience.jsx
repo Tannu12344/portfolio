@@ -3,6 +3,7 @@ import { Section } from '@/components/Section/Section';
 import { Card } from '@/components/Card/Card';
 import { Badge } from '@/components/Badge/Badge';
 import styles from './Experience.module.css';
+import { BackToWorld } from '@/features/developer-world/BackToWorld';
 
 export function Experience() {
   return (
@@ -11,6 +12,7 @@ export function Experience() {
       eyebrow="03 — Experience"
       title="Where I've worked"
     >
+      <BackToWorld/>
       <div className={styles.list}>
         {experience.map((role) => (
           <Card key={role.id} className={styles.card}>

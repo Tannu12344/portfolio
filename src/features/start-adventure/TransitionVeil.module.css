@@ -1,0 +1,23 @@
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  pointer-events: none;
+}
+
+.ring {
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--color-accent-soft) 0%,
+    var(--color-accent-secondary-soft) 45%,
+    transparent 72%
+  );
+  filter: blur(40px);
+}

@@ -3,6 +3,7 @@ import { Section } from '@/components/Section/Section';
 import { Card } from '@/components/Card/Card';
 import { Badge } from '@/components/Badge/Badge';
 import styles from './Projects.module.css';
+import { BackToWorld } from '@/features/developer-world/BackToWorld';
 
 /**
  * Static project grid. The interactive "project explorer" is a future
@@ -16,6 +17,7 @@ export function Projects() {
       title="Selected work"
       description="A few things I've built recently."
     >
+      <BackToWorld/>
       <div className={styles.grid}>
         {projects.map((project) => (
           <Card key={project.id} className={styles.card}>

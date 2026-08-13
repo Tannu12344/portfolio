@@ -7,6 +7,7 @@ import { Skills } from '@/sections/Skills/Skills';
 import { Experience } from '@/sections/Experience/Experience';
 import { Projects } from '@/sections/Projects/Projects';
 import { Contact } from '@/sections/Contact/Contact';
+import { DeveloperWorld } from '@/features/developer-world/DeveloperWorld';
 
 /**
  * Foundation-phase page composition. Sections render static, data-driven
@@ -21,6 +22,7 @@ export default function App() {
       <Navigation />
       <main>
         <Hero />
+        <DeveloperWorld />
         <About />
         <Skills />
         <Experience />

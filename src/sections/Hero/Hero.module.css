@@ -1,41 +1,166 @@
 .hero {
+  position: relative;
   min-height: 100svh;
   display: flex;
   align-items: center;
   padding-top: var(--header-height);
+  overflow: hidden;
+  --parallax-x: 0;
+  --parallax-y: 0;
 }
 
 .content {
+  position: relative;
+  z-index: var(--z-content);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-5);
+  gap: var(--space-4);
   max-width: 760px;
-}
-
-.eyebrowWrap {
-  display: inline-flex;
 }
 
 .title {
   font-size: var(--text-4xl);
 }
 
-.tagline {
+.role {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--weight-medium);
-  color: var(--color-text);
+  color: var(--color-accent-secondary-strong);
 }
 
-.bio {
+.stackLine {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+}
+
+.tagline {
   font-size: var(--text-md);
-  max-width: 56ch;
+  color: var(--color-text);
+  max-width: 52ch;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+/* Wrapper (not the button itself) carries the hover lift, so it never
+   fights with Button's own :active press-state transform. */
+.ctaPrimaryWrap {
+  display: inline-flex;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ctaPrimaryWrap:hover {
+  transform: translateY(-3px);
+}
+
+.exploreBtn {
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+.exploreBtn:hover {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Decorative parallax depth layer ----------
+   Two soft glow orbs that drift gently on their own (ambient float) and
+   shift further with pointer position via useMouseParallax's CSS vars.
+   Entirely decorative: aria-hidden, and both the float keyframe and the
+   pointer-driven shift are disabled under prefers-reduced-motion. */
+.orbAccent,
+.orbSecondary {
+  position: absolute;
+  z-index: var(--z-background);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.orbAccent {
+  width: 280px;
+  height: 280px;
+  top: 18%;
+  right: 8%;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 72%);
+  opacity: 0.22;
+  transform: translate3d(calc(var(--parallax-x) * 30px), calc(var(--parallax-y) * 22px), 0);
+  animation: floatAccent 10s ease-in-out infinite alternate;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.orbSecondary {
+  width: 220px;
+  height: 220px;
+  bottom: 12%;
+  left: 4%;
+  background: radial-gradient(circle, var(--color-accent-secondary) 0%, transparent 72%);
+  opacity: 0.2;
+  transform: translate3d(calc(var(--parallax-x) * -24px), calc(var(--parallax-y) * -18px), 0);
+  animation: floatSecondary 12s ease-in-out infinite alternate;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+@keyframes floatAccent {
+  from {
+    margin-top: 0;
+  }
+  to {
+    margin-top: 24px;
+  }
+}
+
+@keyframes floatSecondary {
+  from {
+    margin-top: 0;
+  }
+  to {
+    margin-top: -20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbAccent,
+  .orbSecondary {
+    animation: none;
+    transform: none;
+  }
+
+  .ctaPrimaryWrap:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .ctaPrimaryWrap {
+    width: 100%;
+  }
+
+  .ctaPrimaryWrap button {
+    width: 100%;
+  }
+
+  .exploreBtn {
+    align-self: center;
+  }
+
+  .orbAccent,
+  .orbSecondary {
+    width: 160px;
+    height: 160px;
+    filter: blur(44px);
+  }
 }
