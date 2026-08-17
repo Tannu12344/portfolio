@@ -96,6 +96,7 @@ export function Hero() {
               variants={fadeInUp}
               className={styles.actions}
             >
+              {/* Start Adventure */}
               <span className={styles.ctaPrimaryWrap}>
                 <Button
                   type="button"
@@ -108,6 +109,19 @@ export function Hero() {
                 </Button>
               </span>
 
+              {/* View Resume */}
+              <Button
+                as="a"
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                variant="secondary"
+                disabled={transitioning}
+              >
+                View Resume ↗
+              </Button>
+
+              {/* Explore Portfolio */}
               <Button
                 type="button"
                 variant="ghost"
