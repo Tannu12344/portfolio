@@ -1,43 +1,136 @@
 .footer {
+  position: relative;
+  z-index: var(--z-content);
+
+  width: 100%;
+
+  margin-top: 0;
+
   border-top: 1px solid var(--color-border-hairline);
+
+  background: var(--color-background);
+
   padding-block: var(--space-8);
 }
 
 .inner {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  flex-direction: column;
+
+  gap: var(--space-6);
+
+  width: 100%;
 }
 
-.copy {
+/* ---------- Identity ---------- */
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.name {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+
+  color: var(--color-text);
+}
+
+.role {
+  margin: 0;
+
   font-size: var(--text-sm);
   color: var(--color-text-faint);
 }
 
+/* ---------- Socials ---------- */
+
 .socials {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
   gap: var(--space-5);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
 }
 
 .socialLink {
+  display: inline-flex;
+
   font-size: var(--text-sm);
   color: var(--color-text-muted);
-  transition: color var(--duration-base) var(--ease-standard);
+
+  transition:
+    color var(--duration-base) var(--ease-standard);
 }
 
 .socialLink:hover {
   color: var(--color-accent);
 }
 
+/* ---------- Bottom ---------- */
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--space-4);
+
+  padding-top: var(--space-4);
+
+  border-top: 1px solid var(--color-border-hairline);
+}
+
+.copy {
+  margin: 0;
+
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
 .top {
+  flex-shrink: 0;
+
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+
   color: var(--color-text-faint);
-  transition: color var(--duration-base) var(--ease-standard);
+
+  transition:
+    color var(--duration-base) var(--ease-standard);
 }
 
 .top:hover {
   color: var(--color-accent-secondary);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 640px) {
+  .footer {
+    padding-block: var(--space-6);
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .socialLink,
+  .top {
+    transition: none;
+  }
 }

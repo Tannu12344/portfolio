@@ -8,9 +8,16 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <Container className={styles.inner}>
-        <p className={styles.copy}>
-          <span className="text-mono">© {year}</span> {profile.name}. Built with React.
-        </p>
+        <div className={styles.identity}>
+          <p className={styles.name}>
+            {profile.name}
+          </p>
+
+          <p className={styles.role}>
+            {profile.role} · React.js · TypeScript · Generative AI
+          </p>
+        </div>
+
         <ul className={styles.socials}>
           {profile.socials.map((social) => (
             <li key={social.id}>
@@ -24,10 +31,43 @@ export function Footer() {
               </a>
             </li>
           ))}
+
+          <li>
+            <a
+              href={`mailto:${profile.email}`}
+              className={styles.socialLink}
+            >
+              Email
+            </a>
+          </li>
+
+          <li>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.socialLink}
+            >
+              Resume
+            </a>
+          </li>
         </ul>
-        <a href="#hero" className={styles.top}>
-          Back to top ↑
-        </a>
+
+        <div className={styles.bottom}>
+          <p className={styles.copy}>
+            <span className="text-mono">
+              © {year}
+            </span>{' '}
+            {profile.name}. Built with React.
+          </p>
+
+          <a
+            href="#hero"
+            className={styles.top}
+          >
+            Back to top ↑
+          </a>
+        </div>
       </Container>
     </footer>
   );
