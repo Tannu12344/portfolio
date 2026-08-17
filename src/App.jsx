@@ -8,7 +8,7 @@ import { Experience } from '@/sections/Experience/Experience';
 import { Projects } from '@/sections/Projects/Projects';
 import { Contact } from '@/sections/Contact/Contact';
 import { DeveloperWorld } from '@/features/developer-world/DeveloperWorld';
-
+import { CommandPalette } from '@/features/command-palette/CommandPalette';
 /**
  * Foundation-phase page composition. Sections render static, data-driven
  * content. Interactive features (skill tree, project explorer, command
@@ -20,6 +20,7 @@ export default function App() {
     <>
       <AmbientBackground />
       <Navigation />
+      <CommandPalette />
       <main>
         <Hero />
         <DeveloperWorld />
