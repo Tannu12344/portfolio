@@ -1,16 +1,287 @@
-.wrap {
+.contactPanel {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: var(--space-6);
+
+  padding: var(--space-6);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface);
+
+  overflow: hidden;
+}
+
+/* ---------- Availability ---------- */
+
+.statusRow {
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding-bottom: var(--space-5);
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--color-accent);
+
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.03),
+    0 0 18px var(--color-accent);
+
+  animation: statusPulse 2.5s ease-in-out infinite;
+}
+
+.status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+
+  color: var(--color-text-muted);
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Main Content ---------- */
+
+.content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-  max-width: 560px;
+  align-items: flex-start;
+
+  padding: var(--space-4) 0;
+}
+
+.eyebrow,
+.socialLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+
+  letter-spacing: var(--tracking-wide);
+
+  color: var(--color-text-muted);
+}
+
+.heading {
+  margin: var(--space-4) 0;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(
+    var(--text-xl),
+    4vw,
+    var(--text-3xl)
+  );
+
+  font-weight: var(--weight-medium);
+
+  line-height: 1.15;
+
+  color: var(--color-text);
 }
 
 .copy {
-  font-size: var(--text-md);
+  max-width: 55ch;
+
+  margin: 0;
+
+  line-height: 1.7;
+
+  color: var(--color-text-muted);
 }
+
+/* ---------- Actions ---------- */
 
 .actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+
   gap: var(--space-3);
+
+  margin-top: var(--space-6);
+}
+
+.copyButton {
+  min-height: 44px;
+
+  padding: 0 var(--space-5);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  background: transparent;
+
+  color: var(--color-text);
+
+  font: inherit;
+  font-size: var(--text-sm);
+
+  cursor: pointer;
+
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.copyButton:hover,
+.copyButton:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+
+  outline: none;
+
+  transform: translateY(-2px);
+}
+
+/* ---------- Email ---------- */
+
+.email {
+  margin-top: var(--space-5);
+
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+
+  color: var(--color-text-muted);
+
+  text-decoration: none;
+
+  transition:
+    color var(--duration-base) var(--ease-out);
+}
+
+.email:hover,
+.email:focus-visible {
+  color: var(--color-accent);
+  outline: none;
+}
+
+/* ---------- Socials ---------- */
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--space-4) 0 var(--space-4) var(--space-6);
+
+  border-left: 1px solid var(--color-border);
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: var(--space-4);
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--space-4);
+
+  padding: var(--space-4) 0;
+
+  border-bottom: 1px solid var(--color-border);
+
+  color: var(--color-text);
+
+  font-size: var(--text-sm);
+  text-decoration: none;
+
+  transition:
+    color var(--duration-base) var(--ease-out),
+    padding-left var(--duration-base) var(--ease-out);
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  color: var(--color-accent);
+  padding-left: var(--space-2);
+
+  outline: none;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 760px) {
+  .contactPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .socialSection {
+    padding:
+      var(--space-5)
+      0
+      0;
+
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 560px) {
+  .contactPanel {
+    padding: var(--space-4);
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .copyButton {
+    width: 100%;
+  }
+
+  .email {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ---------- Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .statusDot {
+    animation: none;
+  }
+
+  .copyButton,
+  .email,
+  .socialLink {
+    transition: none;
+  }
+
+  .copyButton:hover,
+  .socialLink:hover {
+    transform: none;
+  }
 }
