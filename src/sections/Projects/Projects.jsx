@@ -1,59 +1,150 @@
+import { useState } from 'react';
 import { projects } from '@/data/projects';
 import { Section } from '@/components/Section/Section';
-import { Card } from '@/components/Card/Card';
 import { Badge } from '@/components/Badge/Badge';
-import styles from './Projects.module.css';
 import { BackToWorld } from '@/features/developer-world/BackToWorld';
+import styles from './Projects.module.css';
 
-/**
- * Static project grid. The interactive "project explorer" is a future
- * feature (see src/features) — this establishes content structure only.
- */
 export function Projects() {
+  const [selectedId, setSelectedId] = useState(
+    projects.find((project) => project.featured)?.id || projects[0]?.id
+  );
+
+  const selectedProject = projects.find(
+    (project) => project.id === selectedId
+  );
+
   return (
     <Section
       id="projects"
       eyebrow="04 — Projects"
       title="Selected work"
-      description="A few things I've built recently."
+      description="Explore the projects I've built."
     >
-      <BackToWorld/>
-      <div className={styles.grid}>
-        {projects.map((project) => (
-          <Card key={project.id} className={styles.card}>
-            <div className={styles.thumb} aria-hidden="true">
-              <span className="text-mono text-faint">{project.title.slice(0, 2).toUpperCase()}</span>
+      <BackToWorld />
+
+      <div className={styles.explorer}>
+        {/* Project Navigation */}
+        <div className={styles.projectList}>
+          <span className={styles.listLabel}>
+            PROJECT INDEX
+          </span>
+
+          {projects.map((project, index) => {
+            const isSelected = project.id === selectedId;
+
+            return (
+              <button
+                key={project.id}
+                type="button"
+                className={`${styles.projectButton} ${
+                  isSelected ? styles.activeProject : ''
+                }`}
+                onClick={() => setSelectedId(project.id)}
+                aria-pressed={isSelected}
+              >
+                <span className={styles.projectNumber}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <span className={styles.projectButtonContent}>
+                  <strong>{project.title}</strong>
+                  <span>{project.year}</span>
+                </span>
+
+                <span className={styles.projectArrow}>
+                  {isSelected ? '●' : '○'}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Project */}
+        {selectedProject && (
+          <article className={styles.projectPanel}>
+            <div className={styles.projectVisual}>
+              {selectedProject.image ? (
+                <img
+                  src={selectedProject.image}
+                  alt=""
+                  className={styles.projectImage}
+                />
+              ) : (
+                <span className={styles.projectInitials}>
+                  {selectedProject.title
+                    .slice(0, 2)
+                    .toUpperCase()}
+                </span>
+              )}
+
+              <span className={styles.year}>
+                {selectedProject.year}
+              </span>
             </div>
-            <div className={styles.body}>
-              <div className={styles.headRow}>
-                <h3 className={styles.title}>{project.title}</h3>
-                <Badge tone={project.status === 'Live' ? 'success' : 'neutral'}>
-                  {project.status}
+
+            <div className={styles.projectBody}>
+              <div className={styles.projectHeader}>
+                <div>
+                  <span className={styles.panelLabel}>
+                    SELECTED PROJECT
+                  </span>
+
+                  <h3 className={styles.title}>
+                    {selectedProject.title}
+                  </h3>
+                </div>
+
+                <Badge
+                  tone={
+                    selectedProject.status === 'Live'
+                      ? 'success'
+                      : 'neutral'
+                  }
+                >
+                  {selectedProject.status}
                 </Badge>
               </div>
-              <p className={styles.description}>{project.description}</p>
+
+              <p className={styles.description}>
+                {selectedProject.description}
+              </p>
+
               <div className={styles.stack}>
-                {project.stack.map((tech) => (
-                  <Badge key={tech} tone="secondary">
+                {selectedProject.stack.map((tech) => (
+                  <Badge
+                    key={tech}
+                    tone="secondary"
+                  >
                     {tech}
                   </Badge>
                 ))}
               </div>
+
               <div className={styles.links}>
-                {project.links.demo && (
-                  <a href={project.links.demo} target="_blank" rel="noreferrer noopener">
+                {selectedProject.links.demo && (
+                  <a
+                    href={selectedProject.links.demo}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     Live demo →
                   </a>
                 )}
-                {project.links.repo && (
-                  <a href={project.links.repo} target="_blank" rel="noreferrer noopener">
+
+                {selectedProject.links.repo && (
+                  <a
+                    href={selectedProject.links.repo}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     Source →
                   </a>
                 )}
               </div>
             </div>
-          </Card>
-        ))}
+          </article>
+        )}
       </div>
     </Section>
   );
